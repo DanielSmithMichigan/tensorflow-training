@@ -17,9 +17,9 @@ test_w = test_w[:, 0]
 d = 1024
 n_hidden = 15
 learning_rate = .001
-drop_prob = .25
-batch_size = 100
-n_epochs = 15
+drop_prob = .5
+batch_size = 10
+n_epochs = 10
 
 with tf.name_scope("placeholders"):
 	x = tf.placeholder(tf.float32, (None, d))
@@ -47,6 +47,8 @@ with tf.name_scope("summaries"):
 	tf.summary.scalar("loss", l)
 	merged = tf.summary.merge_all()
 
+train_writer = tf.summary.FileWriter('/tmp/fcnet-tox21-dropout', tf.get_default_graph())
+
 step = 0
 N = train_x.shape[0]
 with tf.Session() as sess:
@@ -59,7 +61,7 @@ with tf.Session() as sess:
 			feed_dict={x: batch_x, y: batch_y, keep_prob: drop_prob}
 			_, summary, loss = sess.run([train_op, merged, l], feed_dict=feed_dict)
 			print("epoch %d, step: %d, loss: %f" % (epoch, step, loss))
-			# train_writer.add_summary(summary, step)
+			train_writer.add_summary(summary, step)
 			step += 1
 			pos += batch_size		
 	train_y_pred = sess.run(y_pred, feed_dict={x: train_x, keep_prob: 1.0})
