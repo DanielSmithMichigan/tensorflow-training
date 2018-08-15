@@ -8,16 +8,16 @@ QA_INDICE = 0
 SR_INDICE = 1
 LOSS_WEIGHT_INDICE = 2
 
-batchSize = 128
-numTrainObservations = 1024
-numTestObservations = 256
+batchSize = 1024
+numTrainObservations = 4096
+numTestObservations = 2048
 numEpochs = 850
 layerWidth = 4
-layerDepth = 64
+layerDepth = 128
 learningRate = 10e-5
 gamma = .95
 searchDepth = 6
-negativeRewardLoss = 200
+negativeRewardLoss = 2
 
 __CART_POSITION = 0
 __CART_VELOCITY = 1
@@ -124,11 +124,10 @@ observedMin = np.array(testObservations[SR_INDICE]).min(axis=0)
 qaInput = tf.placeholder(tf.float32, [None, numStateVariables + 1])
 layerOne = tf.layers.dense(inputs=qaInput, units=layerDepth, activation=tf.nn.relu)
 layerTwo = tf.layers.dense(inputs=layerOne, units=layerDepth, activation=tf.nn.relu)
-layerThree = tf.layers.dense(inputs=layerTwo, units=layerDepth, activation=tf.nn.relu)
-predictions = tf.layers.dense(inputs=layerThree, units=numStateVariables + 1)
+predictions = tf.layers.dense(inputs=layerTwo, units=numStateVariables + 1)
 srInput = tf.placeholder(tf.float32, [None, numStateVariables + 1])
-lossWeights = tf.placeholder(tf.float32, [None, numStateVariables + 1])
 losses = tf.losses.mean_squared_error(predictions=predictions, labels=srInput)
+lossWeights = tf.placeholder(tf.float32, [None, numStateVariables + 1])
 weightedLoss = tf.multiply(losses, lossWeights)
 trainingOperation = tf.train.AdamOptimizer(learningRate).minimize(weightedLoss)
 
