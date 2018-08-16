@@ -17,17 +17,18 @@ __RANDOM = 0
 __NOT_RANDOM = 1
 
 __MIN_TEST_SIZE = 128
-__MIN_TRAIN_SIZE = 1024
+__MIN_TRAIN_SIZE = 512
 __NUM_LAYERS = 4
 __LAYER_DEPTH = 128
 __LEARNING_RATE = 10e-5
 __GAMMA = .95
-__SEARCH_DEPTH = 6
-__NEGATIVE_REWARD_LOSS = 2
+__SEARCH_DEPTH = 4
+__NEGATIVE_REWARD_LOSS = 3
 __MAX_EPOCHS = 100
-__MIN_EPOCHS = 10
+__MIN_EPISODES_100_TRAINING = 20
 __MIN_FIT_QUALITY = .8
 __MAX_EPISODES = 20000
+__EPISODE_RENDERING_MIN = 30
 
 env = gym.make('CartPole-v0')
 
@@ -86,6 +87,8 @@ with tf.Session() as sess:
         sr = []
         lossWeights = []
         while not done:
+            if episode > __EPISODE_RENDERING_MIN:
+                env.render()
             if len(trainQa) < __MIN_TRAIN_SIZE:
                 actionChosen = np.random.randint(0, 2)
             else:
@@ -136,8 +139,8 @@ with tf.Session() as sess:
                     t_lossWeights: testLossWeights
                 })
                 fitQuality = trainLoss / testLoss
-                print("Epoch: ",epoch," || Fit quality: ",fitQuality)
-                if (fitQuality <  __MIN_FIT_QUALITY) and epoch > __MIN_EPOCHS:
+                print("Epoch: ",epoch," || Fit quality: ", fitQuality[0], " loss: ",testLoss[0])
+                if (fitQuality <  __MIN_FIT_QUALITY) and episode > __MIN_EPISODES_100_TRAINING:
                     break
 
 
