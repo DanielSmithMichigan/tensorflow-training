@@ -1,0 +1,23 @@
+currentLearningRate = .01
+learningRateSteps = [400, 800]
+gamma = 0.95
+layers = [10, 10]
+maxPoleAngle = 3.0 # max is 12
+maxCartPosition = 1.2 #max is 2.4
+maxVelocityCart = 1.0
+maxVelocityPole = 1.0
+episodesPerResult = 200
+('COUNT: ', 20)
+('MEAN: ', 252.83000000000007)
+('STD: ', 446.6911227011345)
+
+##REMOVE EXTRA TYPE REWARDS##
+currentLearningRate = .01
+learningRateSteps = [400, 800]
+gamma = 0.95
+layers = [10, 10]
+episodesPerResult = 200
+##REMOVE EXTRA TYPE REWARDS##
+('COUNT: ', 20)
+('MEAN: ', 243.39499999999998)
+('STD: ', 464.16037150428946)

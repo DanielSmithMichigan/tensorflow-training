@@ -1,0 +1,49 @@
+
+
+currentLearningRate = .01
+learningRateSteps = [400, 800]
+gamma = 0.90
+layers = [10, 10]
+maxPoleAngle = 3.0 # max is 12
+maxCartPosition = 1.2 #max is 2.4
+maxVelocityCart = 1.0
+maxVelocityPole = 1.0
+episodesPerResult = 200
+('MEAN: ', 142.71999999999997)
+('STD: ', 153.94443672962007)
+('MEAN: ', 87.42)
+('STD: ', 138.45362256004717)
+('MEAN: ', 178.04000000000002)
+('STD: ', 274.52560244902486)
+
+
+
+
+currentLearningRate = .01
+learningRateSteps = [400, 800]
+gamma = 0.98
+layers = [10, 10]
+maxPoleAngle = 3.0 # max is 12
+maxCartPosition = 1.2 #max is 2.4
+maxVelocityCart = 1.0
+maxVelocityPole = 1.0
+episodesPerResult = 200
+('MEAN: ', 119.88)
+('STD: ', 137.80848159674352)
+('MEAN: ', 57.779999999999994)
+('STD: ', 60.05592060738057)
+
+
+
+currentLearningRate = .01
+learningRateSteps = [400, 800]
+gamma = 0.93
+layers = [10, 10]
+maxPoleAngle = 3.0 # max is 12
+maxCartPosition = 1.2 #max is 2.4
+maxVelocityCart = 1.0
+maxVelocityPole = 1.0
+episodesPerResult = 200
+('MEAN: ', 41.82)
+('STD: ', 36.488540666899794)
+
